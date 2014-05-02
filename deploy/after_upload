@@ -1,0 +1,4 @@
+export RAILS_ENV=production
+bundle install --deployment
+bundle exec rake assets:precompile
+bundle exec rake db:migrate

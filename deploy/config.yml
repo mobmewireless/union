@@ -1,0 +1,11 @@
+version: "1.0"
+
+servers:
+  vas-netmagic-cloud-git-deploy:
+    deployment_path: '/home/mobme/deploy/infrastructure-git-deploy-web'
+    shared:
+      - vendor/bundle/
+      - tmp/
+      - log/
+      - cache/
+      - .env
