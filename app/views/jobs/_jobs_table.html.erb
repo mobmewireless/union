@@ -1,0 +1,54 @@
+<table class="table">
+  <% if defined?(:legend) %>
+    <legend><%= legend %></legend>
+  <% end %>
+
+  <thead>
+  <tr>
+    <th style="width: 41px;"></th>
+    <th>ID</th>
+    <th>Project</th>
+    <th>Deployment</th>
+    <th>Who?</th>
+    <th>When?</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% jobs.each do |job| %>
+    <tr>
+      <td><%= job.job_type_html %></td>
+      <td><%= job.id %></td>
+
+      <% if job.project %>
+        <td><%= link_to(job.project.project_name, project_path(job.project)) %></td>
+      <% else %>
+        <td><em>Project Missing</em></td>
+      <% end %>
+
+      <% if job.deployment %>
+        <td><%= link_to(job.deployment.deployment_name, server_path(job.deployment.server)) %></td>
+      <% elsif job.job_type == Job::TYPE_REFRESH %>
+        <td><em>Not Applicable</em></td>
+      <% else %>
+        <td><em>Deployment Missing</em></td>
+      <% end %>
+
+      <td>
+        <% if job.requested_by == job.authorized_by %>
+          <%= email_name(job.requested_by) %>
+        <% else %>
+          <%= email_name(job.requested_by) %> <i class="fa fa-chevron-right"></i> <%= email_name(job.authorized_by) %>
+        <% end %>
+      </td>
+
+      <td><abbr class="timeago" title="<%= job.created_at.iso8601 %>"><%= job.created_at %></abbr></td>
+      <td>
+        <%= job.status_html %>
+        <%= link_to('Logs', job_path(job), class: 'btn btn-default btn-sm') %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

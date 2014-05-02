@@ -1,0 +1,30 @@
+<%= render(partial: 'new_project', locals: { project: @new_project }) if admin? %>
+
+<h2 class="page-header">
+  Existing Projects
+  <% if @filter %>
+    <small>
+      <a href="<%= projects_url %>" class="btn btn-xs btn-success" style="margin: 0 0 6px 6px;">
+        <i class="icon fa fa-minus-circle"></i>
+        Clear Filter
+      </a>
+    </small>
+  <% end %>
+</h2>
+
+<%= render 'filter_projects_accordion' %>
+
+<table class="datatable table table-striped display" id="projects_datatable" data-source="<%= projects_url format: 'json' %>" data-filter="<%= @filter %>">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Git Clone URL</th>
+    <th>Branch</th>
+    <th>Cache</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  </tbody>
+</table>

@@ -1,0 +1,24 @@
+<% if @project.errors.empty? %>
+
+// Mark success on the Create Project button
+$("#projects_submit")[0].innerHTML = "Updated!";
+$("#projects_submit").removeClass('btn-primary');
+$("#projects_submit").addClass('btn-success');
+
+// After a delay of 1.5 seconds, reset the button.
+setTimeout(function() {
+  $("#projects_submit").button('reset');
+  $("#projects_submit").removeClass('btn-success');
+  $("#projects_submit").addClass('btn-primary');
+}, 1500);
+<%
+else
+  @project.errors.each do |key, message|
+%>
+$("input#project_<%= key %>").parent().parent().addClass("has-error");
+$("input#project_<%= key %>").siblings('.help-block').html("<%= message %>");
+$("#projects_submit").button('reset');
+<%
+  end
+end
+%>

@@ -1,0 +1,44 @@
+<% if @project.errors.empty? %>
+  // Add entry to the datatable
+  $('#projects_datatable').dataTable().fnAddData([
+    "<%= j(link_to @project.project_name, @project) %>",
+    "<%= j(git_display_url(@project.git_url)) %>",
+    "<%= j(shorten_if_required(@project.branch, 6)) %>",
+    "<%= j(@project.cached_directory) %>",
+    "<%= j(render :partial => 'projects_actions', locals: { project: @project }) %>"
+  ]);
+
+  // Mark success on the Create Project button
+  $("#projects_submit")[0].innerHTML = "Created!";
+  $("#projects_submit").removeClass('btn-primary');
+  $("#projects_submit").addClass('btn-success');
+
+  // After a delay of two seconds, collapse the accordion, reset the form, and reopen the accordion.
+  setTimeout(function() {
+    $("#projects_new_project_accordion_collapse").collapse('hide');
+
+    setTimeout(function() {
+      $(':input','#create_or_edit_project')
+        .not(':button, :submit, :reset, :hidden')
+        .val('')
+        .removeAttr('checked')
+        .removeAttr('selected');
+
+      $("#projects_submit").button('reset');
+      $("#projects_submit").removeClass('btn-success');
+      $("#projects_submit").addClass('btn-primary');
+
+      $("#projects_new_project_accordion_collapse").collapse('show');
+    }, 500);
+  }, 2000);
+<%
+else
+  @project.errors.each do |key, message|
+%>
+  $("input#project_<%= key %>").parent().parent().addClass("has-error");
+  $("input#project_<%= key %>").siblings('.help-block').html("<%= message %>");
+  $("#projects_submit").button('reset');
+<%
+  end
+end
+%>

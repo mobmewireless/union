@@ -1,0 +1,13 @@
+/vendor/bundle
+.bundle/
+/coverage
+/spec/reports
+*.log
+.yardoc
+*.gem
+/yardoc
+/db/*.sqlite3
+/tmp
+/cache
+/.env
+/script/startzeus

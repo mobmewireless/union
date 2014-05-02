@@ -1,0 +1,6 @@
+# Things to do after transferring files to deployment server. At this point, the 'current' symlink still points to the
+# previous deployment, so this is a great place to perform actions necessary to ready this particular deployment for
+# action.
+
+bundle install --deployment --without osx
+bundle exec rake assets:precompile

@@ -1,0 +1,30 @@
+<div class="page-header page-header-top">
+  <h2>Deployment Jobs</h2>
+</div>
+
+<% unless @jobs[:processing].empty? %>
+    <%= render :partial => 'jobs_table', locals: {jobs: @jobs[:processing], legend: 'Processing'} %>
+<% end %>
+
+<% unless @jobs[:queued].empty? %>
+    <%= render :partial => 'jobs_table', locals: {jobs: @jobs[:queued], legend: 'Queued'} %>
+<% end %>
+
+<table class="table table-striped datatable" id="jobs_datatable" class="display" data-source="<%= jobs_url(format: 'json') %>">
+  <legend>Completed</legend>
+
+  <thead>
+    <tr>
+      <th style="width: 41px;"></th>
+      <th>ID</th>
+      <th>Project</th>
+      <th>Deployment</th>
+      <th>Who?</th>
+      <th>When?</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  </tbody>
+</table>

@@ -1,0 +1,31 @@
+<% unless server.port %>
+  <p class="alert alert-info"> To Enable Logging for this server, update it's
+    port.</p>
+<% end %>
+
+<% if form_method == :update %>
+  <legend>Update existing server</legend>
+<% end %>
+
+<%= form_for(server,
+             html: { id: 'create_or_edit_server', class: 'form-horizontal', role: 'form' },
+             method: (form_method == :update ? 'patch' : 'post'),
+    ) do |f| %>
+
+  <% if (form_method == :create || server.manually_created?) %>
+
+    <div class="form-group">
+      <%= f.label :hostname, class: 'col-sm-2 control-label' %>
+      <div class="col-sm-4">
+        <%= f.text_field :hostname, required: true, class: 'form-control' %>
+        <span class="help-block"></span>
+      </div>
+    </div>
+
+  <% end %>
+
+  <%= render :partial => 'server_extras', locals: { f: f, form_method: :update } %>
+
+  <div id="servers_create_or_edit_alert"></div>
+
+<% end %>

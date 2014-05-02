@@ -1,0 +1,37 @@
+<% content_for :head do %>
+  <%= javascript_include_tag '//www.google.com/jsapi', 'chartkick', 'charts' %>
+<% end %>
+
+<h1>Time Between Failures</h1>
+<%=
+    line_chart(
+      [
+        {
+          name: 'Point Value',
+          data: @timing[:tbf][:point_values]
+        },
+        {
+          name: 'Moving Avg.',
+          data: @timing[:tbf][:moving_averages]
+        }
+      ], library: { hAxis: { format: 'MMM d' }, vAxis: { title: 'Hours between failures' } }
+    )
+%>
+<h1>Time To Repair</h1>
+<%=
+    line_chart(
+      [
+        {
+          name: 'Point Value',
+          data: @timing[:ttr][:point_values]
+        },
+        {
+          name: 'Moving Avg.',
+          data: @timing[:ttr][:moving_averages]
+        }
+      ], library: { hAxis: { format: 'MMM d' }, vAxis: { title: 'Minutes to repair' } }
+    )
+%>
+<h1>Logs and Cards</h1>
+<div id="chart_div" data-card_and_log='<%= @timing[:logs_and_cards].to_json %>' ></div>
+

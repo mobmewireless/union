@@ -1,0 +1,22 @@
+<% content_for :head do %>
+  <%= javascript_include_tag '//www.google.com/jsapi', 'chartkick' %>
+<% end %>
+
+<div class="page-header page-header-top">
+  <h2><%= @board.name %></h2>
+</div>
+
+<div class="row">
+  <%= line_chart metrics_burndown_path(board_id: @board.id), library: { hAxis: { format: 'MMM d' } } %>
+</div>
+
+<table class='table datatable' id="completed_cards_datatable">
+  <legend>Completed cards</legend>
+  <%= render 'card_table_header' %>
+
+  <tbody>
+  <% @cards.each do |done_card| %>
+    <%= render 'card_table_entry', card: done_card %>
+  <% end %>
+  </tbody>
+</table>

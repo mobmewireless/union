@@ -1,0 +1,55 @@
+# Putting some common options in a Hash so that they can be shared between servers.
+common_options: &common_options
+  # Do NOT put a trailing slash on the deployment path.
+  deployment_path: '/home/union/deploy/product-specialization'
+
+  # Files and folders will be copied or created, and linked (recursively, when appropriate), and shared between
+  # deployments.
+  #
+  # Shared git-tracked files that have '.example' in their names, will be copied to the shared folder after removing the
+  # '.example' part, and then sym-linked to the deployment folder.
+  #
+  # Shared un-tracked files and folders (paths ending with a slash) will be created (files are 'touch'-ed, and folders
+  # are 'mkdir'-ed) in the shared folder and then sym-linked to the deployment folder.
+  #
+  # To add new shared files to a deployment which has already been set up, simply add the new item to this list (after
+  # committing the example file, if applicable). It'll be uploaded to (or created in) the shared directory during the
+  # next deploy.
+  shared:
+    - general_configuration.example.yaml  # Renamed and copied, then linked.
+    - config/config_production.yml        # 'touch'-ed, and linked.
+    - vendor/bundle/                      # 'mkdir'-ed, and linked.
+    - tmp/                                # 'mkdir'-ed, and linked.
+
+servers:
+  fully-qualified-server-1-name: &server_1
+    # Generally, we import 'global' settings for each server, then add specific details.
+    <<: *common_options
+
+    # Optional host name, or IP. By default, the server's name is used as hostname.
+    host: "server-1-hostname-or-ip"
+
+    # Optional username with which to login. Default value is 'deploy'.
+    username: 'union'
+
+    # Optional port number for SSH and RSync. Default value is 22.
+    port: 2201
+
+    # Alternate hook names can be supplied if different servers have different requirements. These files must reside in
+    # the deploy directory.
+    after_setup:  'after_setup_server_1'  # Defaults to 'after_setup'
+    after_upload: 'after_upload_server_1' # Defaults to 'after_upload'
+    after_deploy: 'after_deploy_server_1' # Defaults to 'after_deploy'
+
+  fully-qualified-server-1-name-dupe-deployment:
+    # Referencing server_1's settings...
+    <<: *server_1
+
+    # We'll have to correct the host name since this entry's name isn't valid (it's a dupe deployment to the same sever).
+    host: fully-qualified-server-1-name
+
+    # ... and then changing the deployment path.
+    deployment_path: '/home/union/deploy/product-specialization_duplicate_deployment'
+
+  server_2: # Uses all default settings.
+    <<: *common_options

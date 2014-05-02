@@ -1,0 +1,11 @@
+# Set application to execute in production mode.
+export RAILS_ENV=production
+
+# Install rubygems using bundler.
+bundle install --deployment
+
+# Precompile assets.
+bundle exec rake assets:precompile
+
+# Perform DB migrations.
+bundle exec rake db:migrate

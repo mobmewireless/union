@@ -1,0 +1,28 @@
+// We're using Bootstrap (3) with a fixed-top navbar, which takes up 50px of vertical space at the top. Account for it.
+body { padding-top: 50px; }
+
+// Customize page-header, remove the margin at the top, for page-headers appearing at the top of the page.
+.page-header-top {
+  margin-top: 0px;
+}
+
+// TODO: Document .disabled-link, if it is used anywhere.
+.disabled-link {
+  pointer-events: none;
+  cursor: default;
+}
+
+// TODO: Document .remove-bottom-margin, if it is used anywhere.
+.remove-bottom-margin {
+  margin-bottom: 0px;
+}
+
+.gravatar {
+  margin-top: -15px;
+  margin-bottom: -16px;
+}
+
+// Add some top-margin to flash-messages.
+#flash {
+  margin-top: 15px;
+}

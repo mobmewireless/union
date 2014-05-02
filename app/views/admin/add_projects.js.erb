@@ -1,0 +1,12 @@
+<% case @status
+  when :json_parser_error %>
+$("#admin_add_projects_button")[0].innerHTML = "Invalid JSON!";
+$("#admin_add_projects_button").addClass("btn-danger");
+setTimeout(function() {
+  $("#admin_add_projects_button").removeClass("btn-danger");
+  $("#admin_add_projects_button").button('reset');
+}, 2000)
+<% else %>
+$("#admin_add_projects_button")[0].innerHTML = "Queued!";
+$("#admin_add_projects_button").addClass("btn-success");
+<% end %>

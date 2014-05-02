@@ -1,0 +1,17 @@
+<div class="panel-group" id="servers_new_server_accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#servers_new_server_accordion" href="#servers_new_server_accordion_collapse">
+          <i class="fa fa-plus"></i> Add a new Server
+        </a>
+      </h4>
+    </div>
+
+    <div id="servers_new_server_accordion_collapse" class="panel-collapse collapse">
+      <div class="panel-body">
+        <%= render :partial => 'server_form', locals: { form_method: :create, server: server } %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="page-header page-header-top">
+  <h2><%= @server.hostname %></h2>
+</div>
+
+<%= render :partial => 'server_form', locals: { form_method: :update, server: @server } if admin? %>
+
+<% if @deployments.empty? %>
+  <div class="alert alert-warning">
+    <strong>There are no deployments on this server.</strong> Consider deleting
+    this server, if it has been
+    decommissioned.
+  </div>
+<% else %>
+  <legend>Deployments</legend>
+
+  <table class="datatable table table-bordered" id="server_deployments_datatable">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Last Job</th>
+      <th>Project</th>
+      <th>Deployment Name</th>
+      <th>Login User</th>
+      <th>Path</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @deployments.each do |deployment| %>
+      <tr>
+        <td><%= deployment.id %></td>
+        <td><%= since_last_job(deployment.jobs.last) %></td>
+        <td><%= link_to deployment.project.project_name, deployment.project %></td>
+        <td><%= deployment.deployment_name %></td>
+        <td><%= deployment.login_user %></td>
+        <td><%= deployment.deployment_path %></td>
+        <td>Deploy</td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<% if @cards.empty? %>
+  <div class="alert alert-info">
+    <strong>There are no trello cards associated with this server.</strong>
+    Please mention this server's name
+    (<em><%= @server.hostname %></em>) in Trello cards' name or description
+    to
+    track such relationships.
+  </div>
+<% else %>
+  <legend style="margin-top: 10px;">Trello cards</legend>
+
+  <table class="datatable table table-striped" id="server_cards_datatable">
+    <%= render 'metrics/card_table_header' %>
+
+    <tbody>
+    <% @cards.each do |related_card| %>
+      <%= render 'metrics/card_table_entry', card: related_card %>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

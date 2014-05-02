@@ -1,0 +1,32 @@
+<h2>Board</h2>
+
+<legend>Choose Lists</legend>
+
+<%= form_for(@board, url: { action: 'update' }, html: { class: 'form-horizontal', role: 'form' }) do |f| %>
+  <div class="form-group">
+    <%= f.label(:new_list_id, 'New List', class: 'col-sm-2 control-label') %>
+    <div class="col-sm-10">
+      <%= f.select(:new_list_id, options_for_select(@lists, @board.new_list_id), { include_blank: true }, class: 'form-control') %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label(:wip_list_id, 'WIP List', class: 'col-sm-2 control-label') %>
+    <div class="col-sm-10">
+      <%= f.select(:wip_list_id, options_for_select(@lists, @board.wip_list_id), { include_blank: true }, class: 'form-control') %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label(:done_list_id, 'Done List', class: 'col-sm-2 control-label') %>
+    <div class="col-sm-10">
+      <%= f.select(:done_list_id, options_for_select(@lists, @board.done_list_id), { include_blank: true }, class: 'form-control') %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit 'Save', class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

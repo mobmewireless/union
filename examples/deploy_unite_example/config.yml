@@ -1,0 +1,9 @@
+servers:
+  hostname-of-server-with-union:
+    deployment_path: '/home/union/deploy/union'
+    shared:
+      - vendor/bundle/
+      - tmp/
+      - log/
+      - cache/
+      - .env

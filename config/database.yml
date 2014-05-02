@@ -1,0 +1,23 @@
+development:
+  adapter: mysql2
+  database: <%= ENV['UNION_DB_NAME'] %>
+  username: <%= ENV['UNION_DB_USERNAME'] %>
+  password: <%= ENV['UNION_DB_PASSWORD'] %>
+  host: <%= ENV['UNION_DB_HOST'] %>
+  reconnect: true
+
+test:
+  adapter: mysql2
+  database: <%= ENV['UNION_TEST_DB_NAME'] %>
+  username: <%= ENV['UNION_TEST_DB_USERNAME'] %>
+  password: <%= ENV['UNION_TEST_DB_PASSWORD'] %>
+  host: <%= ENV['UNION_TEST_DB_HOST'] %>
+  reconnect: true
+
+production:
+  adapter: mysql2
+  database: <%= ENV['UNION_DB_NAME'] %>
+  username: <%= ENV['UNION_DB_USERNAME'] %>
+  password: <%= ENV['UNION_DB_PASSWORD'] %>
+  host: <%= ENV['UNION_DB_HOST'] %>
+  reconnect: true

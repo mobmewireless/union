@@ -1,0 +1,40 @@
+<%= form_for(project,
+             remote: true,
+             html: { id: 'create_or_edit_project', class: 'form-horizontal', role: 'form' },
+             method: (form_method == :update ? 'put' : 'post'),
+    ) do |f| %>
+  <% if form_method == :update %>
+    <legend>Update existing project</legend>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :project_name, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :project_name, required: true, class: 'form-control' %>
+      <span class="help-block"></span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :git_url, 'Git Clone URL', class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :git_url, required: true, class: 'form-control' %>
+      <span class="help-block"></span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :branch, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-10">
+      <%= f.text_field :branch, placeholder: 'master', class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.button "#{form_method == :update ? 'Update' : 'Create'} Project", id: 'projects_submit', class: 'btn btn-primary', 'data-loading-text'.to_sym => "#{form_method == :update ? 'Updating' : 'Creating'}..." %>
+    </div>
+  </div>
+
+  <div id="projects_create_or_edit_alert"></div>
+<% end %>

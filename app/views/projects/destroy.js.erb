@@ -1,0 +1,2 @@
+// Remove the entry from the datatable.
+$('.datatable').dataTable().fnDeleteRow($("span:contains('PID<%= j(@project_id.to_s) %>')").parent().parent()[0]);

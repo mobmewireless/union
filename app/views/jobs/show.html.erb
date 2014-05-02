@@ -1,0 +1,41 @@
+<div class="page-header page-header-top">
+  <div class="clearfix">
+    <h1 class="pull-left">
+      Live Logs
+
+      <small>
+        <% if @job.deployment %>
+          <%= @job.project.project_name %> &mdash;
+          <%= @job.deployment.deployment_name %>
+        <% else %>
+          Unknown Project &mdash;
+        <% end %>
+      </small>
+    </h1>
+    <div class="pull-left heading-badges">
+      <%= @job.job_type_html %>
+      <br/>
+      <%= @job.status_html %>
+    </div>
+  </div>
+</div>
+
+
+<% unless @job.complete? %>
+  Logs are updated every two seconds.
+  <%= link_to 'Stop', 'javascript:void("stop")', :id => :stop, class: 'btn btn-sm btn-danger' %>
+  <%= link_to 'Start', 'javascript:void("start")', :id => :start, class: 'btn btn-sm btn-success', style: 'display: none' %>
+<% end %>
+
+<%= link_to 'Scroll to Bottom'.html_safe, 'javascript:void("bottom")', :id => :stop, class: 'btn btn-default btn-sm', onclick: 'scroll_to_bottom(); return false;' %>
+<br/><br/>
+
+<% unless @job.complete? %>
+  <span id="job_id" data-id="<%= @job.id %>"></span>
+<% end %>
+
+<div class="well" style="font-family: monospace; overflow: auto;">
+  <div id='logs'><%= labelize(@lines).join('<br/>').html_safe %></div><%= @job.complete? ? '' : image_tag('spinner.gif', id: 'jobs_spinner') %>
+</div>
+
+<%= link_to 'Scroll to Top'.html_safe, 'javascript:void("top")', :id => :stop, class: 'btn btn-default btn-sm', onclick: 'scroll_to_top(); return false;' %>

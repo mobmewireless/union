@@ -1,0 +1,28 @@
+<div class="form-group">
+  <%= f.label :login_user, class: 'col-sm-2 control-label' %>
+  <div class="col-sm-2">
+    <%= f.text_field :login_user, required: true, class: 'form-control' %>
+    <span class="help-block"></span>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :port, class: 'col-sm-2 control-label' %>
+  <div class="col-sm-1">
+    <%= f.text_field :port, required: true, class: 'form-control' %>
+    <span class="help-block"></span>
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="col-sm-2 control-label"></div>
+  <div class="col-sm-10">
+    <%= f.check_box :logging %> Logging
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="col-sm-offset-2 col-sm-10">
+    <%= f.button "#{form_method == :update ? 'Update' : 'Add'} Server", id: 'servers_submit', class: 'btn btn-primary' %>
+  </div>
+</div>

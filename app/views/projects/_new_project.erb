@@ -1,0 +1,17 @@
+<div class="panel-group" id="projects_new_project_accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#projects_new_project_accordion" href="#projects_new_project_accordion_collapse">
+          <i class="fa fa-plus"></i> Create a new Project
+        </a>
+      </h4>
+    </div>
+
+    <div id="projects_new_project_accordion_collapse" class="panel-collapse collapse">
+      <div class="panel-body">
+        <%= render :partial => 'project_form', locals: { form_method: :create, project: project } %>
+      </div>
+    </div>
+  </div>
+</div>

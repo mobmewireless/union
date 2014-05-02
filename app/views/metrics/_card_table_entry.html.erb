@@ -1,0 +1,18 @@
+<tr>
+  <td><%= card_date card.updated_at %></td>
+  <td>
+    <% if card.label %>
+      <span class="dot dot-<%= card.label %>"></span>
+    <% end %>
+    <%= link_to card.name, card.url %>
+  </td>
+  <td>
+    <%=
+        card.assigned_members.map do |member_name, member_url|
+          link_to(member_name, member_url)
+        end.join(', ').html_safe
+    %>
+  </td>
+  <td><%= humanize card.cycle_time %></td>
+  <td><%= humanize card.lead_time %></td>
+</tr>

@@ -1,0 +1,2 @@
+# Restart the webserver.
+touch tmp/restart.txt

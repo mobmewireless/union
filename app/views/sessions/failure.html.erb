@@ -1,0 +1,31 @@
+<div class="page-header">
+  <h1>Authentication Failure!</h1>
+</div>
+
+<% case @reason %>
+<% when :unauthenticated_email_address %>
+  <p>Access to this interface is restricted. Please make sure that you supply correct credentials while logging in.</p>
+  <p>
+    For your information, the e-mail address that we received from Google was:
+    <code><%= @unauthenticated_email_address %></code>
+  </p>
+<% when :invalid_credentials %>
+  <p>
+    It looks like you denied permissions to this application! Please note that you cannot use this interface without
+    supplying valid credentials.
+  </p>
+  <p>
+    For your information, the only data this application uses is your e-mail address (for identification), and it is
+    never stored on our servers.
+  </p>
+<% else %>
+  <p>
+    An unknown error occurred! Please contact support, with information on the steps you took before this error showed
+    up. You should also supply the following data:
+  </p>
+  <div class="row">
+    <pre class="col-lg-5"><%= Base64.encode64({ timestamp: Time.now.utc, reason: @reason, session: session.inspect }.to_json) %></pre>
+  </div>
+<% end %>
+
+<p>You can attempt to log in again, by visiting the <%= link_to 'root page', root_url %>.</p>
