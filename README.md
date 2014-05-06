@@ -122,7 +122,21 @@ integration for boards that are visible with the API key you configured.
 
 ## OSSEC Integration
 
-TODO: Documentation of OSSEC integration.
+Union can fetch events from remote server using
+[OSSEC](http://ossec-docs.readthedocs.org/en/latest/manual/non-technical-overview.html). You need to have [OSSEC](http://www.ossec.net/)
+and [ossec-collector](https://github.com/mobmewireless/ossec-collector) installed in the remote server to enable this.
+
+To install OSSEC, please refer to [official documentation](http://ossec-docs.readthedocs.org/en/latest/manual/installation/)
+for instructions, choose local mode of installation if you are only using it with Union. Then fork [ossec-collector](https://github.com/mobmewireless/ossec-collector)
+and deploy it to remote server. Add remote server's `deploy` user to `ossec` group (Required to access logs).
+
+    usermod -a -G ossec deploy
+
+
+And finally configure environment variable OSSEC_COLLECTOR_PATH for Union. Please note that ossec-collector
+should be deployed to the same path in every server.
+
+These logs are currently charted in www.yourunionurl/servers/:id/metrics
 
 ## Testing
 ### Manual
