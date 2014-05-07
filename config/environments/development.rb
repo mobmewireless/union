@@ -1,4 +1,4 @@
-Union::Application.configure do
+Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -26,4 +26,12 @@ Union::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  # Adds additional error checking when seriving assets at runtime.
+  # Checks for improperly decleared sprockets dependencies.
+  # Raises helpful error messages.
+  config.assets.debug = true
+
+  # Raises error for missing translations
+  # config.action_view.raise_on_missing_translations = true
 end

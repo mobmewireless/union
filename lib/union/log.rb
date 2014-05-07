@@ -37,7 +37,7 @@ module Union
           log_pattern_formatter = PatternFormatter.new pattern: "%d [%l] (#{Config.job.id}) %m"
 
           # Create the log directory if it doesn't exist.
-          year_and_month = Time.now.in_time_zone('Asia/Calcutta').strftime('%Y_%m')
+          year_and_month = Time.now.in_time_zone('Kolkata').strftime('%Y_%m')
           log_directory = "#{Config.log_path}/#{year_and_month}"
           FileUtils.mkdir_p(log_directory) unless File.exist?(log_directory)
 
