@@ -12,12 +12,12 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js" type="text/javascript"></script>
   <![endif]-->
 
-  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
 
   <!-- Size should be 32 x 32 pixels -->
   <%= favicon_link_tag %>
 
-  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
   <%= yield :head %>
 </head>
@@ -59,8 +59,8 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <%= image_tag(gravatar_image_url(session[:authenticated][:info][:email], size: 50, secure: true), alt: session[:authenticated][:info][:name] || session[:authenticated][:info][:email], class: 'gravatar') %>&nbsp;
-            <%= session[:authenticated][:info][:name] || session[:authenticated][:info][:email] %>
+            <%= image_tag(gravatar_image_url(session[:authenticated]['info']['email'], size: 50, secure: true), alt: session[:authenticated]['info']['name'] || session[:authenticated]['info']['email'], class: 'gravatar') %>&nbsp;
+            <%= session[:authenticated]['info']['name'] || session[:authenticated]['info']['email'] %>
             <b class="caret"></b>
           </a>
 

@@ -1,8 +1,15 @@
 # Union
 
-CI with smarts. ^_^
+Union is a code workflow tool. Built from ground up with DevOps-first principles in mind. So what does it do, and why
+should you use it?
 
-## Installation and self-deployment
+  * **Reliable and Repeatable**: Automated deployment of Git repositories to servers (via SSH).
+  * **Ease of Use**: All interaction with the application is via the web interface (some command-line fu required for setup).
+  * **Visibility**: Maintains list of assets, and the mapping between servers and code.
+  * **Change Tracking**: Integrates with [Trello](https://trello.com/), mapping tasks performed to your servers and code assets, paying special attention to unplanned work.
+  * **Change Detection**: Integrates with [OSSEC](http://www.ossec.net/), mapping tasks performed on Trello to OSSEC-based security notifications on server.
+
+## Installation
 
 ### Requirements
   * Ruby version 2.1.1 (>= 1.9.3 should work, but not tested).
@@ -10,10 +17,10 @@ CI with smarts. ^_^
 
 It is suggested that you create a non-privileged user to run your application. For example, let's assume you create a
 user with the name *union*. You should generate an SSH key for this user with ``union$ ssh-keygen -t rsa`` and give read
-access to your git server for user *union* with its SSH public key.
+access to your Git server for user *union* with its SSH public key.
 
 ### Installation steps
-Clone git repository
+Clone Git repository:
 
     git clone https://github.com/mobmewireless/union.git
     bundle install --deployment
@@ -55,20 +62,19 @@ Create directory ``deploy`` on *union* user's home directory and make it group-w
     chmod g+w -R /home/union/deploy
 
 ### Deployment of repository
-
-For deploying an application create a file ``deploy/config.yml`` in application root. See
+For deploying a repository, create a file ``deploy/config.yml`` in application root. See
 [example configuration](https://github.com/mobmewireless/union/tree/master/examples/deploy_fully_explained) for help.
 Commit this file, and any optional after_* files, and push it upstream. You'll have to map hostname of target server to
 its IP in /etc/hosts of server hosting Union.
 
-Now login to Union with one of the admin emails address that you configured. Create a new project with application's git
+Now login to Union with one of the admin emails address that you configured. Create a new project with application's Git
 URL - it will fetch deployment server details from ``deploy/config.yaml``. Go to the project's page and click
 ``Actions > Setup``, this will setup the basic directory structure and shared directory. Now for deployment use
 ``Actions > Deploy``. You can also do this from the home page.
 
 ### Self deployment
 
-Union can deploy itself (!). Just fork Union from github, add and commit a ``deploy/config.yml`` with your Union server
+Union can deploy itself (!). Just fork Union from Github, add and commit a ``deploy/config.yml`` with your Union server
 details, including path to existing deployment, making sure that user set up is as per recommendations, and follow above
 steps.
 
@@ -106,6 +112,32 @@ When performing *Deploy*:
   7. Point ``current`` symlink to directory created in step 4.
   8. Execute ``deploy/after_deploy`` from the ``current`` directory path.
 
+## Trello Integration
+Union integrates with Trello, mapping cards created on your boards to servers and projects. Once a board is linked via
+the web interface, just mention the server or project name in a card's title or description, and the mapping is taken
+care of automatically via the use of Trello Webhooks.
+
+Just visit the Administration section on the web interface, and check the Trello Boards section, to enable webhook
+integration for boards that are visible with the API key you configured.
+
+## OSSEC Integration
+
+Union can fetch events from remote server using
+[OSSEC](http://ossec-docs.readthedocs.org/en/latest/manual/non-technical-overview.html). You need to have [OSSEC](http://www.ossec.net/)
+and [ossec-collector](https://github.com/mobmewireless/ossec-collector) installed in the remote server to enable this.
+
+To install OSSEC, please refer to [official documentation](http://ossec-docs.readthedocs.org/en/latest/manual/installation/)
+for instructions, choose local mode of installation if you are only using it with Union. Then fork [ossec-collector](https://github.com/mobmewireless/ossec-collector)
+and deploy it to remote server. Add remote server's `deploy` user to `ossec` group (Required to access logs).
+
+    usermod -a -G ossec deploy
+
+
+And finally configure environment variable OSSEC_COLLECTOR_PATH for Union. Please note that ossec-collector
+should be deployed to the same path in every server.
+
+These logs are currently charted in www.yourunionurl/servers/:id/metrics
+
 ## Testing
 ### Manual
 To execute all tests manually, run:
@@ -140,7 +172,7 @@ Also see ``.env.example`` file in project root.
 *  **GOOGLE_CLIENT_ID**: Google client for oauth ( Required in production ).
 *  **GOOGLE_CLIENT_SECRET**: Google client secret for oauth ( Required in production ).
 
-### Trello Integration
+### Trello
 *  **TRELLO_API_KEY**: API Key supplied by trello identifying your instance of the application.
 *  **TRELLO_API_SECRET**: API Secret supplied by trello, used in verifying source of requests to webhook callback URL.
 *  **TRELLO_API_TOKEN**: API Token generated for the above API key, authorizing read and write permissions on the board you

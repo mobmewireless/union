@@ -125,7 +125,7 @@ class Job < ActiveRecord::Base
   ########
 
   def log_file_path
-    month = created_at.in_time_zone('Asia/Calcutta').strftime('%Y_%m')
+    month = created_at.in_time_zone('Kolkata').strftime('%Y_%m')
     File.join("#{Rails.root}", 'log', 'jobs', month, "job_#{id}.log")
   end
 
