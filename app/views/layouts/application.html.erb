@@ -59,8 +59,8 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <%= image_tag(gravatar_image_url(session[:authenticated][:info][:email], size: 50, secure: true), alt: session[:authenticated][:info][:name] || session[:authenticated][:info][:email], class: 'gravatar') %>&nbsp;
-            <%= session[:authenticated][:info][:name] || session[:authenticated][:info][:email] %>
+            <%= image_tag(gravatar_image_url(session[:authenticated]['info']['email'], size: 50, secure: true), alt: session[:authenticated]['info']['name'] || session[:authenticated]['info']['email'], class: 'gravatar') %>&nbsp;
+            <%= session[:authenticated]['info']['name'] || session[:authenticated]['info']['email'] %>
             <b class="caret"></b>
           </a>
 
