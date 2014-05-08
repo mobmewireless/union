@@ -7,6 +7,8 @@
         <% if @job.deployment %>
           <%= @job.project.project_name %> &mdash;
           <%= @job.deployment.deployment_name %>
+        <% elsif @job.project %>
+          <%= @job.project.project_name %>
         <% else %>
           Unknown Project &mdash;
         <% end %>
