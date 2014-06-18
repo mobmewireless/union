@@ -55,5 +55,5 @@ Rails.application.routes.draw do
   get 'logout' => 'sessions#destroy', as: 'logout'
 
   # Root '/' leads to the project index
-  root to: 'projects#index'
+  root to: 'sessions#new'
 end
