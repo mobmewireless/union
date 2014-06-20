@@ -6,6 +6,10 @@ class SessionsController < ApplicationController
   # This is the where authentication occurs, after all.
   skip_before_filter :require_authentication
 
+  def new
+    redirect_to request.env['omniauth.origin'] || '/' if session[:authenticated]
+  end
+
   # Create an authorized session if the e-mail received from Google Authentication callback is an approved email address.
   def create
     if auth_hash['info']['email'].ends_with? "@#{APP_CONFIG[:allowed_email_host]}"
@@ -43,5 +47,10 @@ protected
   # Returns omniauth's post-authorization details hash.
   def auth_hash
     request.env['omniauth.auth']
+  end
+
+  def organization_of(organization_url)
+    data = JSON.parse(open(organization_url).read)
+    data.map { |x| x['login'] }
   end
 end

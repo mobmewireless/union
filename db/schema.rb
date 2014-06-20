@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140411114300) do
+ActiveRecord::Schema.define(version: 20140618081617) do
 
   create_table "boards", force: true do |t|
     t.string   "trello_board_id",   null: false
@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(version: 20140411114300) do
     t.datetime "failed_at"
     t.string   "locked_by"
     t.string   "queue"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
@@ -81,8 +81,8 @@ ActiveRecord::Schema.define(version: 20140411114300) do
     t.string   "login_user"
     t.integer  "port"
     t.string   "deployment_path"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "deployment_name"
     t.string   "settings_hash"
   end
@@ -91,12 +91,20 @@ ActiveRecord::Schema.define(version: 20140411114300) do
   add_index "deployments", ["project_id"], name: "index_deployments_on_project_id", using: :btree
   add_index "deployments", ["server_id"], name: "index_deployments_on_server_id", using: :btree
 
+  create_table "identities", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "jobs", force: true do |t|
     t.integer  "status"
     t.string   "requested_by"
     t.string   "authorized_by"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "deployment_id"
     t.integer  "job_type"
     t.integer  "project_id"
@@ -112,8 +120,8 @@ ActiveRecord::Schema.define(version: 20140411114300) do
     t.string   "project_name"
     t.text     "git_url"
     t.string   "branch"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "projects_servers", id: false, force: true do |t|
@@ -148,8 +156,8 @@ ActiveRecord::Schema.define(version: 20140411114300) do
 
   create_table "servers", force: true do |t|
     t.string   "hostname"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "manually_created", default: false
     t.boolean  "logging"
     t.integer  "port"

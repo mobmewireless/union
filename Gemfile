@@ -39,6 +39,9 @@ gem 'httparty'
 # Login with Google.
 gem 'omniauth-google-oauth2'
 
+# Password login.
+gem 'omniauth-identity'
+
 # Periodic tasks.
 gem 'whenever', require: false
 

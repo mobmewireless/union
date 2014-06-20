@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3">
+
+    <div class="page-header-top">
+      <h1>Register</h1>
+    </div>
+
+    <%= form_tag '/auth/identity/register' do %>
+        <% if @identity && @identity.errors.any? %>
+            <div class="alert alert-danger">
+              <h2><%= pluralize(@identity.errors.count, 'error') %> prohibited this account from being saved:</h2>
+              <ul>
+                <% @identity.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+
+        <div class="form-body">
+          <div class="field">
+            <br>
+            <%= text_field_tag :name, @identity.try(:name), { class: 'form-control', placeholder: 'name' } %>
+          </div>
+          <div class="field">
+            <br>
+            <%= text_field_tag :email, @identity.try(:email), { class: 'form-control', placeholder: 'email' } %>
+          </div>
+          <div class="field">
+            <br>
+            <%= password_field_tag :password, '', { class: 'form-control', placeholder: 'password' } %>
+          </div>
+          <div class="field">
+            <br>
+            <%= password_field_tag :password_confirmation, '', { class: 'form-control', placeholder: 'password confirmation' } %>
+          </div>
+        </div>
+
+        <div class="form-footer">
+          <br>
+          <button class="btn btn-large btn-default btn-block" type="submit">Register</button>
+        </div>
+
+    <% end %>
+  </div>
+</div>
