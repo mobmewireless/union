@@ -8,7 +8,7 @@
   </div>
 <% end %>
 <%= link_to "<span id='projects_refresh_spinner_#{project.id}'></span><i id='projects_refresh_icon_#{project.id}' class='fa fa-refresh'></i>".html_safe, refresh_project_path(project), method: :post, class: 'btn btn-info btn-xs', title: 'Refresh project information', id: "projects_refresh_#{project.id}" %>
-<%= link_to("<i class='fa fa-minus-circle'></i>".html_safe, project, data: { confirm: 'Are you sure you want to delete this project?' }, method: :delete, class: 'btn btn-danger btn-xs', remote: true, title: 'Delete project') if admin? %>
+<%= link_to("<i class='fa fa-minus-circle'></i>".html_safe, project, data: { confirm: 'Are you sure you want to delete this project?' }, method: :delete, class: 'btn btn-danger btn-xs', title: 'Delete project') if admin? %>
 
 <!- Insert the Project ID into each of these actions so that the delete action's client-side selector can find the row to remove from datatable. -->
 <span style="display: none;">PID<%= project.id %></span>

@@ -36,7 +36,13 @@ class ProjectsController < ApplicationController
   def destroy
     project = Project.find(params[:id])
     @project_id = project.id
-    project.destroy
+
+    if project.destroy
+      flash[:alert] = 'Deleted Project'
+    else
+      flash[:alert] = project.errors.full_messages
+    end
+    redirect_to action: :index, status: 303
   end
 
   def deploy

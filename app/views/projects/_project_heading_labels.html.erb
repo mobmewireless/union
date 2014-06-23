@@ -2,4 +2,8 @@
   <span class='label label-info'>ID: <%= project.id %></span>
   <span class='label label-info'>Cache path: /cache/<%= project.cached_directory %></span>
   <span class='label label-info'>Cache revision: <%= project.cache_repository_revision %></span>
+
+  <div class="pull-right">
+    <%= link_to('Delete Project', project, data: { confirm: 'Are you sure you want to delete this project?' }, method: :delete, class: 'btn btn-danger btn-xs', title: 'Delete project') if admin? %>
+  </div>
 </div>
