@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get 'boards/show'
 
   # Projects section - the heart of this 'project'. :)
@@ -55,8 +56,8 @@ Rails.application.routes.draw do
   # Auth routes
   match 'auth/:provider/callback' => 'sessions#create', via: [:get, :post]
   match 'auth/failure' => 'sessions#failure', via: [:get, :post]
-  get 'logout' => 'sessions#destroy', as: 'logout'
-  get 'login' => 'sessions#new', as: 'login'
+  # get 'logout' => 'sessions#destroy', as: 'logout'
+  # get 'login' => 'sessions#new', as: 'login'
 
   # Root '/' leads to the project index
   root to: 'projects#index'
