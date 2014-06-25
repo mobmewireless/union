@@ -4,7 +4,8 @@ class SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token if Rails.env.development?
 
   # This is the where authentication occurs, after all.
-  skip_before_filter :require_authentication
+  # skip_before_filter :require_authentication
+  skip_before_filter :authenticate_user!
 
   def new
     redirect_to request.env['omniauth.origin'] || '/' if session[:authenticated]
@@ -27,10 +28,10 @@ class SessionsController < ApplicationController
     require 'base64'
 
     case params[:message]
-      when 'invalid_credentials'
-        @reason = :invalid_credentials
-      else
-        @reason = params.inspect
+    when 'invalid_credentials'
+      @reason = :invalid_credentials
+    else
+      @reason = params.inspect
     end
 
     render :layout => 'application_unauthenticated'
@@ -38,8 +39,8 @@ class SessionsController < ApplicationController
 
   # Logout.
   def destroy
-    session[:authenticated] = false
-    render :layout => 'application_unauthenticated'
+    # session[:authenticated] = false
+    # render :layout => 'application_unauthenticated'
   end
 
 protected

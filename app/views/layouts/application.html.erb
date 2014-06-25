@@ -24,7 +24,7 @@
 
 <body>
 
-<% if session[:authenticated] %>
+<% if user_signed_in? %>
 
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
@@ -64,13 +64,13 @@
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <%= image_tag(gravatar_image_url(session[:authenticated]['info']['email'], size: 50, secure: true), alt: session[:authenticated]['info']['name'] || session[:authenticated]['info']['email'], class: 'gravatar') %>&nbsp;
-                <%= session[:authenticated]['info']['name'] || session[:authenticated]['info']['email'] %>
+                <%= image_tag(gravatar_image_url(current_user.email, size: 50, secure: true), alt: current_user.email || current_user.email, class: 'gravatar') %>&nbsp;
+                <%= current_user.email %>
                 <b class="caret"></b>
               </a>
 
               <ul class="dropdown-menu">
-                <li><%= link_to("<i class='fa fa-sign-out'></i> Logout".html_safe, logout_path) %></li>
+                <li><%= link_to("<i class='fa fa-sign-out'></i> Logout".html_safe, destroy_user_session_path, method: :delete) %></li>
               </ul>
             </li>
           </ul>
