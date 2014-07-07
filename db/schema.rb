@@ -91,14 +91,6 @@ ActiveRecord::Schema.define(version: 20140625052804) do
   add_index "deployments", ["project_id"], name: "index_deployments_on_project_id", using: :btree
   add_index "deployments", ["server_id"], name: "index_deployments_on_server_id", using: :btree
 
-  create_table "identities", force: true do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "password_digest"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "jobs", force: true do |t|
     t.integer  "status"
     t.string   "requested_by"
