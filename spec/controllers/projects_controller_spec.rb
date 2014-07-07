@@ -25,7 +25,7 @@ describe ProjectsController do
     end
 
     it 'calls refresh on supplied project' do
-      expect(project).to receive(:refresh).with('test_user@testcompany.com')
+      expect(project).to receive(:refresh).with(test_user.email)
       post :refresh, id: project.id
     end
 

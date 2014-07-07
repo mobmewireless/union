@@ -104,7 +104,7 @@ describe Server do
       end
 
       it 'passes with both login_user and port given' do
-        expect { server_3.valid? }.to be_true
+        expect(server_3.valid?).to be true
       end
     end
   end
