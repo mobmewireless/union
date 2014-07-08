@@ -82,5 +82,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # For devise to send mails.
-  config.action_mailer.default_url_options = { :host => 'deploy.mobme.in' }
+  config.action_mailer.default_url_options = { host: ENV['UNION_MAILER_URL'] }
 end
