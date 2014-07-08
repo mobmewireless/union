@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(params[:project])
     @project.save
-    @project.refresh(session[:authenticated]['info']['email'].strip)
+    @project.refresh(current_user.email)
   end
 
   # GET /projects/1
@@ -47,18 +47,18 @@ class ProjectsController < ApplicationController
 
   def deploy
     project = Project.find(params[:id])
-    project.deploy(session[:authenticated]['info']['email'].strip, admin: view_context.admin?)
+    project.deploy(current_user.email, admin: view_context.admin?)
   end
 
   def setup
     project = Project.find(params[:id])
-    project.setup(session[:authenticated]['info']['email'].strip, admin: view_context.admin?)
+    project.setup(current_user.email, admin: view_context.admin?)
   end
 
   # POST /projects/:id/refresh
   def refresh
     project = Project.find(params[:id])
-    job = project.refresh(session[:authenticated]['info']['email'].strip)
+    job = project.refresh(current_user.email)
 
     if project.errors.empty?
       flash[:notice] = "Refresh <a href='#{job_url(job)}'>job</a> has been created!".html_safe
