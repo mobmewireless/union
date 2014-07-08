@@ -1,6 +1,6 @@
 module ApplicationHelper
   def admin?
-    APP_CONFIG['admin_emails'].include? session[:authenticated]['info']['email'].strip
+    APP_CONFIG['admin_emails'].include? current_user.email
   end
 
   def shorten_if_required(text, allowed_length)

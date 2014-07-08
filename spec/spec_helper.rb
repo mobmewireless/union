@@ -27,6 +27,10 @@ RSpec.configure do |config|
 
   # Factory Girl for models.
   config.include FactoryGirl::Syntax::Methods
+
+  config.infer_spec_type_from_file_location!
+
+  config.include Devise::TestHelpers, type: :controller
 end
 
 module WebhookRequestHelpers
@@ -36,13 +40,21 @@ module WebhookRequestHelpers
 end
 
 module AuthenticationHelpers
-  def login_as_user!
-    session[:authenticated] = { 'info' => { 'email' => 'test_user@testcompany.com' } }
+
+  def test_user
+    @test_user ||= FactoryGirl.create(:user)
+  end
+
+  def login_as_user!(user = test_user)
+    user.confirm!
+    sign_in :user, user
+    user
   end
 
   def login_as_admin!
-    APP_CONFIG[:admin_emails] ||= []
-    APP_CONFIG[:admin_emails] << 'test_user@testcompany.com'
-    login_as_user!
+    user = test_user
+    APP_CONFIG['admin_emails'] ||= []
+    APP_CONFIG['admin_emails'] << user.email
+    login_as_user!(user)
   end
 end

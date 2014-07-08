@@ -7,13 +7,14 @@ describe AdminController do
     login_as_admin!
   end
 
+
   describe 'POST refresh_boards' do
     before do
-      Board.stub :refresh!
+      allow(Board).to receive(:refresh!)
     end
 
     it 'calls Board.refresh!' do
-      Board.should_receive(:refresh!)
+      expect(Board).to receive(:refresh!)
       post :refresh_boards
     end
 
