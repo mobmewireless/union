@@ -145,7 +145,7 @@ class Project < ActiveRecord::Base
 
   class << self
     # Deferred (delayed_job) job to refresh all projects listed in database.
-    def refresh_all
+    def refresh_all(requested_by)
       all.each { |project| project.refresh }
     end
 
