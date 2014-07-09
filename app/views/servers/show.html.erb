@@ -1,5 +1,5 @@
 <div class="page-header page-header-top">
-  <h2><%= @server.hostname %></h2>
+  <h2> <%= @server.hostname %> <%=  link_to "Metrics", {controller: "servers", action: "metrics", id: @server}, class: "span6 pull-right btn btn-primary" %> </h2>
 </div>
 
 <%= render :partial => 'server_form', locals: { form_method: :update, server: @server } if admin? %>

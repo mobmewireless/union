@@ -1,7 +1,8 @@
 class ApiController < ApplicationController
   respond_to :json
 
-  skip_before_filter :require_authentication
+  # skip_before_filter :require_authentication
+  skip_before_filter :authenticate_user!
 
   # Regular API routes are secured with an access token.
   before_filter :verify_access_token!, except: :webhook

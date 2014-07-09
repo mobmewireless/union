@@ -1,0 +1,38 @@
+<div class="height-adjust">
+  <div class="page-header">
+    <h1>Sign In</h1>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-4 col-xs-offset-1">
+      <%= link_to 'Login with Google', user_omniauth_authorize_path(:google_oauth2),
+                  class:'btn btn-primary btn-large btn-block btn-danger login-button-google'%>
+    </div>
+
+    <div class="col-xs-4 col-xs-offset-2">
+      <%= form_tag '/auth/identity/callback' do %>
+          <div class="form-body">
+            <div class="form-group">
+              <div class="field">
+                <%= text_field_tag :auth_key, '', { class: 'form-control', placeholder: 'email' } %>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="field">
+                <%= password_field_tag :password, '', { class: 'form-control', placeholder: 'password' } %>
+              </div>
+            </div>
+          </div>
+          <div class="form-footer">
+            <button class="btn btn-large btn-default btn-block" type="submit">Sign In</button>
+            <br>
+            <div class="row">
+              <div class="col-xs-6 col-xs-offset-3">
+                <%= link_to 'Create an account', new_identity_path %>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
