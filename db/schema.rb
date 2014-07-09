@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140411114300) do
+ActiveRecord::Schema.define(version: 20140625052804) do
 
   create_table "boards", force: true do |t|
     t.string   "trello_board_id",   null: false
@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(version: 20140411114300) do
     t.datetime "failed_at"
     t.string   "locked_by"
     t.string   "queue"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
@@ -81,8 +81,8 @@ ActiveRecord::Schema.define(version: 20140411114300) do
     t.string   "login_user"
     t.integer  "port"
     t.string   "deployment_path"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "deployment_name"
     t.string   "settings_hash"
   end
@@ -95,8 +95,8 @@ ActiveRecord::Schema.define(version: 20140411114300) do
     t.integer  "status"
     t.string   "requested_by"
     t.string   "authorized_by"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "deployment_id"
     t.integer  "job_type"
     t.integer  "project_id"
@@ -112,8 +112,8 @@ ActiveRecord::Schema.define(version: 20140411114300) do
     t.string   "project_name"
     t.text     "git_url"
     t.string   "branch"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "projects_servers", id: false, force: true do |t|
@@ -148,8 +148,8 @@ ActiveRecord::Schema.define(version: 20140411114300) do
 
   create_table "servers", force: true do |t|
     t.string   "hostname"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "manually_created", default: false
     t.boolean  "logging"
     t.integer  "port"
@@ -157,5 +157,30 @@ ActiveRecord::Schema.define(version: 20140411114300) do
   end
 
   add_index "servers", ["hostname"], name: "index_servers_on_hostname", unique: true, using: :btree
+
+  create_table "users", force: true do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "provider"
+    t.string   "uid"
+  end
+
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

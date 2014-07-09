@@ -4,7 +4,7 @@ describe ServersController do
   include AuthenticationHelpers
 
   before :each do
-    login_as_user!
+    login_as_admin!
   end
 
   describe "GET 'index'" do
