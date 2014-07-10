@@ -146,7 +146,7 @@ class Project < ActiveRecord::Base
   class << self
     # Deferred (delayed_job) job to refresh all projects listed in database.
     def refresh_all(requested_by)
-      all.each { |project| project.refresh }
+      all.each { |project| project.refresh(requested_by) }
     end
 
     # Deferred (delayed_job) method to add multiple projects supplied as JSON. This is intended as a method of importing
