@@ -14,6 +14,8 @@ Delayed::Worker.delay_jobs = false
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
+APP_CONFIG[:allowed_email_host] = 'example.org'
+
 RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -48,7 +50,6 @@ module AuthenticationHelpers
   def login_as_user!(user = test_user)
     user.confirm!
     sign_in :user, user
-    user
   end
 
   def login_as_admin!
