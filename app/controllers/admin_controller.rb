@@ -12,7 +12,7 @@ class AdminController < ApplicationController
   end
 
   def refresh_projects
-    Project.refresh_all(session[:authenticated]['info']['email'])
+    Project.refresh_all(current_user.email)
   end
 
   def add_projects
