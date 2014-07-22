@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(version: 20140625052804) do
     t.datetime "failed_at"
     t.string   "locked_by"
     t.string   "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
@@ -81,8 +81,8 @@ ActiveRecord::Schema.define(version: 20140625052804) do
     t.string   "login_user"
     t.integer  "port"
     t.string   "deployment_path"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "deployment_name"
     t.string   "settings_hash"
   end
@@ -95,8 +95,8 @@ ActiveRecord::Schema.define(version: 20140625052804) do
     t.integer  "status"
     t.string   "requested_by"
     t.string   "authorized_by"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "deployment_id"
     t.integer  "job_type"
     t.integer  "project_id"
@@ -112,8 +112,8 @@ ActiveRecord::Schema.define(version: 20140625052804) do
     t.string   "project_name"
     t.text     "git_url"
     t.string   "branch"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "projects_servers", id: false, force: true do |t|
@@ -148,8 +148,8 @@ ActiveRecord::Schema.define(version: 20140625052804) do
 
   create_table "servers", force: true do |t|
     t.string   "hostname"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.boolean  "manually_created", default: false
     t.boolean  "logging"
     t.integer  "port"

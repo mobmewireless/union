@@ -13,7 +13,7 @@ module Union::Trello
     end
 
     def list_cards(list_id)
-      options = { query: credentials.merge(members: 'true', actions: 'createCard,convertToCardFromCheckItem') }
+      options = { query: credentials.merge(members: 'true', actions: 'createCard,convertToCardFromCheckItem,copyCard') }
       self.class.get("/lists/#{list_id}/cards", options)
     end
 

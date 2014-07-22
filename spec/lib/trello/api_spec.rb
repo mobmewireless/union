@@ -30,7 +30,7 @@ module Union::Trello
 
     describe '#list_cards' do
       it 'lists cards on list with members, and actions createCard and convertToCardFromCheckItem' do
-        described_class.should_receive(:get).with('/lists/LIST_ID/cards', credentials(members: 'true', actions: 'createCard,convertToCardFromCheckItem'))
+        described_class.should_receive(:get).with('/lists/LIST_ID/cards', credentials(members: 'true', actions: 'createCard,convertToCardFromCheckItem,copyCard'))
         subject.list_cards 'LIST_ID'
       end
 
