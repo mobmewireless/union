@@ -81,13 +81,6 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-group :development do
-  gem 'pry-rails'
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'thin'
-end
-
 group :development, :test do
   gem 'rspec-rails'
   gem 'fakeweb'
@@ -95,4 +88,9 @@ group :development, :test do
   gem 'faker'
   gem 'fakefs', :require => 'fakefs/safe'
   gem 'zeus'
+  gem 'pry-rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'thin'
+  gem 'guard-rspec'
 end
