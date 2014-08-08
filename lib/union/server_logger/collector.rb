@@ -31,10 +31,10 @@ module Union::ServerLogger
       )
 
       conn = Union::ServerConnection.new(name, server)
-      path = Pathname.new('lib/union/server_logger/collector.py').realpath
-
+      copy_collector(conn)
+      
       begin
-        conn.execute_logger(path)
+        conn.execute_logger
       rescue SocketError => e
         message = "Couldn't collect logs from #{name} : #{e.message}"
         Union::Log.error message
@@ -50,6 +50,18 @@ module Union::ServerLogger
       logs.each do |time, data|
         server_log = server.server_logs.new(timestamp: time, log: data)
         server_log.save
+      end
+    end
+
+    private
+    def copy_collector(connection)
+      unless connection.path_exists?('/tmp/collector.py')
+        path = Pathname.new('lib/union/server_logger/collector.py').realpath
+        begin
+          connection.remote_copy(path, '/tmp/collector.py')
+        rescue => e
+          Union::Log.error e
+        end
       end
     end
   end
