@@ -31,10 +31,11 @@ module Union::ServerLogger
       )
 
       conn = Union::ServerConnection.new(name, server)
+      path = Pathname.new('lib/union/server_logger/collector.py').realpath
 
       begin
-        conn.execute_logger(APP_CONFIG['ossec_collector_path'])
-      rescue Exceptions::ServerLoggerExecutableMissing, SocketError => e
+        conn.execute_logger(path)
+      rescue SocketError => e
         message = "Couldn't collect logs from #{name} : #{e.message}"
         Union::Log.error message
         { Time.now.to_f => [ message ] }.to_json

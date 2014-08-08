@@ -176,16 +176,12 @@ module Union
     end
 
     # Executes OSSEC server logger
-    # @param bin_path [String] path to OSSEC server log executable.
-    def execute_logger(bin_path)
-      Log.info "#{@deployment_name}: Verifying existance of OSSEC collector executable"
-
-      unless path_exists?(bin_path)
-        raise Exceptions::ServerLoggerExecutableMissing, "OSSEC collector executable doesn't exist in #{@deployment_name}"
-      end
+    # @param path [Pathname] path to OSSEC server log executable.
+    def execute_logger(path)
+      remote_copy(path, '/tmp/collector.py')
 
       Log.info "#{@deployment_name}: Executing OSSEC collector"
-      execute bin_path
+      execute '/tmp/collector.py'
     end
 
     private
