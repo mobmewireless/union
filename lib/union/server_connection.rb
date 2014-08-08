@@ -176,12 +176,9 @@ module Union
     end
 
     # Executes OSSEC server logger
-    # @param path [Pathname] path to OSSEC server log executable.
-    def execute_logger(path)
-      remote_copy(path, '/tmp/collector.py')
-
+    def execute_logger
       Log.info "#{@deployment_name}: Executing OSSEC collector"
-      execute '/tmp/collector.py'
+      execute 'python /tmp/collector.py'
     end
 
     private

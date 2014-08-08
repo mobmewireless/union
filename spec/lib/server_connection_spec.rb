@@ -11,16 +11,9 @@ module Union
     end
 
     describe '#execute_logger' do
-      it 'copies OSSEC collector to server' do
-        allow_any_instance_of(ServerConnection).to receive(:execute)
-        expect(subject).to receive(:remote_copy).with(path, '/tmp/collector.py')
-        subject.execute_logger(path)
-      end
-
       it 'executes OSSEC collector' do
-        expect(subject).to receive(:remote_copy)
-        expect(subject).to receive(:execute).with('/tmp/collector.py')
-        subject.execute_logger(path)
+        expect(subject).to receive(:execute).with('python /tmp/collector.py')
+        subject.execute_logger
       end
     end
   end

@@ -53,6 +53,7 @@ module Union::ServerLogger
 
       before do
         allow(Union::ServerConnection).to receive(:new).and_return(mock_connection)
+        allow(subject).to receive(:copy_collector).with(mock_connection)
       end
 
       it 'creates an instance of ServerConnection' do
@@ -60,8 +61,13 @@ module Union::ServerLogger
         subject.run_and_collect_logs(server)
       end
 
+      it 'copies collector to remote server' do
+        expect(subject).to receive(:copy_collector).with(mock_connection)
+        subject.run_and_collect_logs(server)
+      end
+
       it 'calls execute_logger method of ServerConnection instance' do
-        expect(mock_connection).to receive(:execute_logger).with(path)
+        expect(mock_connection).to receive(:execute_logger)
         subject.run_and_collect_logs(server)
       end
 
