@@ -5,27 +5,36 @@ module Union::ServerLogger
     describe '#run' do
       let(:server_1) { create :server, logging: true, login_user: 'deploy', port: 22 }
       let(:server_2) { create :server, logging: true, login_user: 'deploy', port: 22 }
+      let(:server_3) { create :server, logging: false }
       let(:server_1_logs) { double 'Server 1 Logs' }
       let(:server_2_logs) { double 'Server 2 Logs' }
 
       before :each do
-        3.times { create :server, logging: false }
         allow(subject).to receive(:run_and_collect_logs).with(server_1).and_return(server_1_logs)
         allow(subject).to receive(:run_and_collect_logs).with(server_2).and_return(server_2_logs)
         allow(subject).to receive(:save_logs)
         allow(subject).to receive(:every).and_yield
       end
 
-      it 'calls run_and_collect_logs for servers with logging turned on' do
-        expect(subject).to receive(:run_and_collect_logs).with(server_1)
-        expect(subject).to receive(:run_and_collect_logs).with(server_2)
-        subject.run
+      context 'logging is turned off' do
+        it 'does not run and collect log from server' do
+          expect(subject).to_not receive(:run_and_collect_logs).with(server_3)
+          subject.run
+        end
       end
 
-      it 'calls save_logs for servers with logging turned on' do
-        expect(subject).to receive(:save_logs).with(server_1_logs, server_1)
-        expect(subject).to receive(:save_logs).with(server_2_logs, server_2)
-        subject.run
+      context 'logging is turned on' do
+        it 'calls run_and_collect_logs for servers' do
+          expect(subject).to receive(:run_and_collect_logs).with(server_1)
+          expect(subject).to receive(:run_and_collect_logs).with(server_2)
+          subject.run
+        end
+
+        it 'calls save_logs for servers' do
+          expect(subject).to receive(:save_logs).with(server_1_logs, server_1)
+          expect(subject).to receive(:save_logs).with(server_2_logs, server_2)
+          subject.run
+        end
       end
     end
 
@@ -38,6 +47,8 @@ module Union::ServerLogger
             port: server.port
         )
       }
+
+      let(:path) { Pathname.new('lib/union/server_logger/collector.py').realpath }
       let(:mock_connection) { double 'Server Connection', execute_logger: nil }
 
       before do
@@ -50,16 +61,8 @@ module Union::ServerLogger
       end
 
       it 'calls execute_logger method of ServerConnection instance' do
-        expect(mock_connection).to receive(:execute_logger).with(APP_CONFIG['ossec_collector_path'])
+        expect(mock_connection).to receive(:execute_logger).with(path)
         subject.run_and_collect_logs(server)
-      end
-
-      context 'when execute_logger raises ServerLoggerExecutableMissing' do
-        it 'logs the event' do
-          allow(mock_connection).to receive(:execute_logger).and_raise(Exceptions::ServerLoggerExecutableMissing)
-          expect(Union::Log).to receive(:error).with(/Exceptions::ServerLoggerExecutableMissing/)
-          subject.run_and_collect_logs(server)
-        end
       end
 
       context 'when execute_logger raises SocketError' do
