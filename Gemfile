@@ -31,7 +31,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
 # Bootstrap styling.
-gem 'twitter-bootstrap-rails', git: 'https://github.com/seyhunak/twitter-bootstrap-rails.git', branch: 'bootstrap3'
+gem 'twitter-bootstrap-rails', git: 'https://github.com/seyhunak/twitter-bootstrap-rails.git', branch: 'bootstrap3', ref: '128f37'
 
 # Ruby Trello API.
 gem 'httparty'
@@ -49,7 +49,7 @@ gem 'whenever', require: false
 gem 'chartkick'
 
 # Pretty tables!
-gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git'
+gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git', ref: '477e49'
 gem 'will_paginate'
 gem 'jquery-ui-rails'
 
