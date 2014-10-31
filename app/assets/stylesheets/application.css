@@ -5,6 +5,6 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new file per style scope.
  *= require_self
  *= require dataTables/jquery.dataTables.bootstrap3
- *= require jquery.ui.datepicker
+ *= require jquery-ui/datepicker
  *= require_tree .
 */

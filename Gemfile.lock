@@ -1,14 +1,16 @@
 GIT
   remote: https://github.com/rweng/jquery-datatables-rails.git
-  revision: 729a7fd576c3b119212762b8617814b720595fd6
+  revision: 477e49a649c8d862988298bc96a93e030d023e0e
+  ref: 477e49
   specs:
-    jquery-datatables-rails (3.0.0)
+    jquery-datatables-rails (1.12.2)
       jquery-rails
       sass-rails
 
 GIT
   remote: https://github.com/seyhunak/twitter-bootstrap-rails.git
-  revision: 1d93c5a77049b3d21d17c847ad0531d7714fa229
+  revision: 128f373e151528c9516ea8df32831fc60ac1c35d
+  ref: 128f37
   branch: bootstrap3
   specs:
     twitter-bootstrap-rails (3.1.1)
