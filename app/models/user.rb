@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   validate :validate_host
 
   def self.from_omniauth(auth)
-    where(auth.slice(:provider, :uid)).first_or_create do |user|
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.skip_confirmation!
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
