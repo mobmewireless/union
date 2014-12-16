@@ -32,14 +32,11 @@ module Union::ServerLogger
 
       conn = Union::ServerConnection.new(name, server)
       copy_collector(conn)
-      
-      begin
-        conn.execute_logger
-      rescue SocketError => e
-        message = "Couldn't collect logs from #{name} : #{e.message}"
-        Union::Log.error message
-        { Time.now.to_f => [ message ] }.to_json
-      end
+      conn.execute_logger
+    rescue SocketError, Errno::ETIMEDOUT => e
+      message = "Couldn't collect logs from #{name} : #{e.message}"
+      Union::Log.error message
+      {Time.now.to_f => [message]}.to_json
     end
 
     # Saves logs to database
