@@ -53,10 +53,6 @@ gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-
 gem 'will_paginate'
 gem 'jquery-ui-rails'
 
-# Backwards-compatibility to Rail3 code. NOTE: protected-attributes must appear before delayed_jobs.
-# TODO: Remove usage to these gems when dependant code is updated.
-gem 'protected_attributes'
-
 # Delayed jobs.
 gem 'delayed_job_active_record'
 

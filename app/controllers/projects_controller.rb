@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
 
   # POST /projects
   def create
-    @project = Project.new(params[:project])
+    @project = Project.new project_params
     @project.save
     @project.refresh(current_user.email)
   end
@@ -67,5 +67,10 @@ class ProjectsController < ApplicationController
     end
 
     redirect_to projects_url
+  end
+
+  private
+  def project_params
+    params.require(:project).permit(:project_name, :git_url, :branch)
   end
 end

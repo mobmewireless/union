@@ -1,6 +1,4 @@
 class Deployment < ActiveRecord::Base
-  attr_accessible :project_id, :server_id, :login_user, :port, :deployment_path, :deployment_name, :settings_hash
-
   belongs_to :project
   belongs_to :server
   has_many :jobs

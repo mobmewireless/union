@@ -1,6 +1,4 @@
 class Server < ActiveRecord::Base
-  attr_accessible :hostname, :port, :logging, :login_user, :manually_created
-
   has_many :deployments
   has_many :projects, through: :deployments
 

@@ -1,6 +1,4 @@
 class Project < ActiveRecord::Base
-  attr_accessible :project_name, :git_url, :branch
-
   has_many :deployments, dependent: :delete_all
   has_many :servers, through: :deployments
   has_many :jobs

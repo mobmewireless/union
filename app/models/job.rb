@@ -1,8 +1,5 @@
 # @author Hari Gopal <mail@harigopal.in>
 class Job < ActiveRecord::Base
-  attr_accessible :deployment_id, :job_type, :requested_by, :authorized_by,
-                  :project_id
-
   belongs_to :deployment
   belongs_to :project
   has_many :job_logs
