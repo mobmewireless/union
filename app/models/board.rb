@@ -2,8 +2,6 @@ class Board < ActiveRecord::Base
   has_many :cards, dependent: :destroy
   has_many :reports, as: :owner
 
-  attr_accessible :trello_board_id, :new_list_id, :wip_list_id, :done_list_id
-
   scope :subscribed, -> { where 'trello_webhook_id IS NOT NULL' }
 
   # Contact Trello API and add missing boards to database.

@@ -1,6 +1,4 @@
 class Card < ActiveRecord::Base
-  attr_accessible :trello_id
-
   has_many :card_tags, dependent: :destroy
   has_many :servers, through: :card_tags, source: :target, source_type: 'Server'
   has_many :projects, through: :card_tags, source: :target, source_type: 'Project'

@@ -117,9 +117,9 @@ describe Server do
     let!(:card_1) { create :card, servers: [server] }
     let!(:card_2) { create :card, servers: [server], created_at: 4.days.ago }
 
+
     it 'returned hash contains timestamp to log mapping' do
       logs = server.logs_and_cards_with_timestamp(3.days.ago)
-      puts logs
       expect(logs[:logs]).to eq({ server_log_1.timestamp => server_log_1.log.join(',') })
     end
 
