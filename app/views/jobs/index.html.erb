@@ -10,7 +10,7 @@
     <%= render :partial => 'jobs_table', locals: {jobs: @jobs[:queued], legend: 'Queued'} %>
 <% end %>
 
-<table class="table table-striped datatable" id="jobs_datatable" class="display" data-source="<%= jobs_url(format: 'json') %>">
+<table class="table table-striped display" id="jobs_datatable" data-source="<%= jobs_url(format: 'json') %>">
   <legend>Completed</legend>
 
   <thead>

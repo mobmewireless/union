@@ -49,7 +49,7 @@ gem 'whenever', require: false
 gem 'chartkick'
 
 # Pretty tables!
-gem 'jquery-datatables-rails', git: 'https://github.com/rweng/jquery-datatables-rails.git', ref: '477e49'
+gem 'jquery-datatables-rails'
 gem 'will_paginate'
 gem 'jquery-ui-rails'
 
