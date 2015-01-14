@@ -1,6 +1,4 @@
 class Report < ActiveRecord::Base
-  attr_accessible :report_type, :data, :owner
-
   belongs_to :owner, polymorphic: true
 
   TYPE_BURNDOWN = 'burndown'

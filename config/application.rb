@@ -23,5 +23,8 @@ module Union
 
     # Let's skip locale validation. This app is EN only, for the forseeable future.
     config.i18n.enforce_available_locales = false
+
+    # Do not swallow errors in after_commit/after_rollback callbacks.
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end
