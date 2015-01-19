@@ -31,7 +31,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
 # Bootstrap styling.
-gem 'twitter-bootstrap-rails'
+gem 'twitter-bootstrap-rails', github: 'seyhunak/twitter-bootstrap-rails'
 
 # Ruby Trello API.
 gem 'httparty'
