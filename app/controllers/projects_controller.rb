@@ -28,8 +28,9 @@ class ProjectsController < ApplicationController
 
   # PUT /projects/:id
   def update
+    puts params
     @project = Project.find(params[:id])
-    @project.update_attributes(params[:project])
+    @project.update_attributes(project_params)
   end
 
   # DELETE /projects/:id
